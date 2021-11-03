@@ -1,0 +1,25 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  ## Common
+  - argocd-applications/istio-operator.yaml
+  - argocd-applications/istio.yaml    
+  - argocd-applications/istio-resources.yaml
+  - argocd-applications/cert-manager-dns-01.yaml
+
+  # Pick *one* of the following applications:  
+  # - argocd-applications/oidc-auth-on-cluster-dex.yaml
+  # - argocd-applications/oidc-auth-on-cluster-keycloak.yaml
+  - argocd-applications/oidc-auth-external.yaml
+
+  ## System
+  - argocd-applications/cluster-autoscaler.yaml
+  - argocd-applications/aws-load-balancer-controller.yaml
+  - argocd-applications/external-dns.yaml
+  - argocd-applications/external-secrets.yaml
+  - argocd-applications/metrics-server.yaml
+
+  ## Hawkeye
+  - argocd-applications/hawkeye-dashboard.yaml
+  - argocd-applications/hawkeye-perfecta.yaml

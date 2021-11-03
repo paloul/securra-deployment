@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels: 
+    app: hawkeye-perfecta
+  name: hawkeye-perfecta-api
+  namespace: hawkeye-perfecta
+spec:
+  selector:
+    app: hawkeye-perfecta
+  type: ClusterIP
+  ports:
+    - port: 5000
+      targetPort: 5000

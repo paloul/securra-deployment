@@ -1,0 +1,22 @@
+# Github and background content for aws-fsx-csi-driver
+# https://github.com/kubernetes-sigs/aws-efs-csi-driver
+# https://aws.amazon.com/blogs/containers/introducing-efs-csi-dynamic-provisioning/
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: metrics-server
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: <<__git_repo.url__>>
+    targetRevision: <<__git_repo.target_revision__>>
+    path: distribution/metrics-server
+    kustomize:
+      version: v4.0.5
+  destination:
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

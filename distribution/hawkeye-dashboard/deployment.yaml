@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hawkeye
+  labels:
+    app: hawkeye
+  namespace: hawkeye-dashboard
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hawkeye
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: hawkeye
+      annotations:
+        sidecar.istio.io/inject: "false"
+    spec:
+      containers:
+        - name: hawkeye
+          securityContext: {}
+          image: "113151489485.dkr.ecr.us-west-2.amazonaws.com/ai.beyond.hawkeye/ls-frontend:0.0.20"
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources: 
+            requests:
+              memory: "500Mi"
+              cpu: "1000m"
+            limits:
+              memory: "1.25Gi"
+              cpu: "1900m"
+      nodeSelector:
+        node-class: "front-end"
+      tolerations:
+      - key: "only-frontend"
+        operator: "Equal"
+        value: "true"
+        effect: "NoSchedule"
+

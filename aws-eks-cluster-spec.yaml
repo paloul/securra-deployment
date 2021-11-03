@@ -1,0 +1,120 @@
+# https://eksctl.io/usage/schema/
+#
+
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  # Name of your cluster, change to whatever you find fit.
+  # If changed, make sure to change all nodegroup tags from 
+  # 'k8s.io/cluster-autoscaler/cluster-name: "owned"' --> 'k8s.io/cluster-autoscaler/your-new-name: "owned"'
+  name: hawkeye
+  # choose your region wisely, this will significantly impact the cost incurred
+  region: us-west-2 # Oregon
+  # 1.14 Kubernetes version since Kubeflow 1.0 officially supports the same
+  version: '1.18' # Downgrading to 1.18 because Kubeflow officially hasnt listed 1.19 support
+  tags:
+    # Add more cloud tags if needed for billing
+    environment: development
+    creator: paloul
+    project: hawkeye
+    cluster: hawkeye
+
+iam:
+  # https://eksctl.io/usage/schema/#iam-withOIDC
+  withOIDC: true
+
+vpc:
+  cidr: 10.10.0.0/16
+  # https://eksctl.io/usage/vpc-networking/#nat-gateway
+  nat:
+    gateway: Single # other options: Disable, Single (default), HighlyAvailable 
+
+  # https://eksctl.io/usage/vpc-networking/#managing-access-to-the-kubernetes-api-server-endpoints
+  clusterEndpoints:
+    publicAccess:  true
+    privateAccess: true
+
+# Add all possible AZs to ensure nodes can be spun up in any AZ later on. 
+# THIS CAN'T BE CHANGED LATER. YOU WILL HAVE TO CREATE A NEW CLUSTER TO ADD NEW AZ SUPPORT.
+# This list applies to the whole cluster and isn't specific to nodegroups
+availabilityZones: ["us-west-2a", "us-west-2b", "us-west-2c"]
+
+nodeGroups:
+  - name: ng-util
+    desiredCapacity: 1
+    minSize: 1
+    maxSize: 6
+    volumeSize: 80
+    volumeType: gp3
+    instanceType: t3a.large 
+    availabilityZones: ["us-west-2a", "us-west-2b", "us-west-2c"]
+    labels:
+      node-class: "utility"
+    tags:
+      # EC2 tags required for cluster-autoscaler auto-discovery
+      k8s.io/cluster-autoscaler/node-template/label/node-class: utility
+      k8s.io/cluster-autoscaler/enabled: "true"
+      k8s.io/cluster-autoscaler/hawkeye: "owned"
+    iam:
+      withAddonPolicies:
+        ebs: true
+        fsx: true
+        efs: true
+        albIngress: true
+        autoScaler: true
+        cloudWatch: true
+
+  - name: ng-frontend
+    desiredCapacity: 1
+    minSize: 1
+    maxSize: 3
+    volumeSize: 80
+    volumeType: gp3
+    instanceType: t3a.small
+    availabilityZones: ["us-west-2a", "us-west-2b", "us-west-2c"]
+    labels:
+      node-class: "front-end"
+    taints:
+      only-frontend: "true:NoSchedule"
+    tags:
+      # EC2 tags required for cluster-autoscaler auto-discovery
+      k8s.io/cluster-autoscaler/node-template/label/node-class: front-end
+      k8s.io/cluster-autoscaler/node-template/taint/only-frontend: "true:NoSchedule"
+      k8s.io/cluster-autoscaler/enabled: "true"
+      k8s.io/cluster-autoscaler/hawkeye: "owned"
+    iam:
+      withAddonPolicies:
+        ebs: true
+        fsx: true
+        efs: true
+        albIngress: true
+        autoScaler: true
+        cloudWatch: true
+
+  - name: ng-perfecta
+    desiredCapacity: 3
+    minSize: 3
+    maxSize: 3
+    volumeSize: 80
+    volumeType: gp3
+    instanceType: t3a.medium
+    availabilityZones: ["us-west-2a", "us-west-2b", "us-west-2c"]
+    labels:
+      node-class: "perfecta"
+    taints:
+      only-perfecta: "true:NoSchedule"
+    tags:
+      # EC2 tags required for cluster-autoscaler auto-discovery
+      k8s.io/cluster-autoscaler/node-template/label/node-class: perfecta
+      k8s.io/cluster-autoscaler/node-template/taint/only-perfecta: "true:NoSchedule"
+      k8s.io/cluster-autoscaler/enabled: "true"
+      k8s.io/cluster-autoscaler/hawkeye: "owned"
+    iam:
+      withAddonPolicies:
+        ebs: true
+        fsx: true
+        efs: true
+        albIngress: true
+        autoScaler: true
+        cloudWatch: true

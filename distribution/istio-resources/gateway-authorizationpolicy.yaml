@@ -1,0 +1,23 @@
+# Allow all traffic to the istio-ingressgateway
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: istio-ingressgateway
+  namespace: istio-system
+spec:
+  action: CUSTOM
+  selector:
+    # Same as the istio-ingressgateway Service selector
+    matchLabels:
+      app: istio-ingressgateway
+      istio: ingressgateway
+  provider:
+    name: oauth2-proxy
+  rules:
+  - to:
+    - operation:
+        hosts:
+        - <<__subdomain_dashboard__>>.<<__domain__>>
+        - <<__subdomain_perfecta__>>.<<__domain__>>
+        - <<__subdomain_argocd__>>.<<__domain__>>
+        
