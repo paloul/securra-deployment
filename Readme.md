@@ -123,7 +123,7 @@ Create the Policy and Role for the Cluster Autoscaler to work properly:
 ```
 # The policy file is already included as part of this repo
 aws iam create-policy \
-    --policy-name AmazonEKSClusterAutoscalerPolicy \
+    --policy-name AmazonEKSClusterAutoscalerPolicySecurra \
     --policy-document file://cluster-autoscaler-policy.json
 # Note the ARN returned in the output for use in a later step.
 ```
@@ -136,7 +136,7 @@ eksctl create iamserviceaccount \
   --cluster=securra \
   --namespace=kube-system \
   --name=cluster-autoscaler \
-  --attach-policy-arn=arn:aws:iam::113151489485:policy/AmazonEKSClusterAutoscalerPolicy \
+  --attach-policy-arn=arn:aws:iam::113151489485:policy/AmazonEKSClusterAutoscalerPolicySecurra \
   --override-existing-serviceaccounts \
   --approve
 ```
@@ -150,7 +150,7 @@ You will first have to create the Policy and Role for the external-dns system to
 ```
 # The policy file is already included as part of this repo
 aws iam create-policy \
-    --policy-name AmazonEKSClusterExternalDnsPolicy \
+    --policy-name AmazonEKSClusterExternalDnsPolicySecurra \
     --policy-document file://external-dns-policy.json
 # Note the ARN returned in the output for use in a later step.
 ```
@@ -163,7 +163,7 @@ eksctl create iamserviceaccount \
   --cluster=securra \
   --namespace=kube-system \
   --name=external-dns \
-  --attach-policy-arn=arn:aws:iam::113151489485:policy/AmazonEKSClusterExternalDnsPolicy \
+  --attach-policy-arn=arn:aws:iam::113151489485:policy/AmazonEKSClusterExternalDnsPolicySecurra \
   --override-existing-serviceaccounts \
   --approve
 ```
@@ -180,7 +180,7 @@ version is used, then make sure to update the IAM Policy for the LB Controller h
 # Create an IAM policy from the json already downloaded, lb-controller-iam_policy.json
 # This mightve already been done, you will see an error if the Policy already exists, ignore.
 aws iam create-policy \
-    --policy-name AWSLoadBalancerControllerIAMPolicy \
+    --policy-name AWSLoadBalancerControllerIAMPolicySecurra \
     --policy-document file://lb-controller-v2_2_0-iam_policy.json
 # Note the ARN returned in the output for use in a later step.
 ```
@@ -194,7 +194,7 @@ eksctl create iamserviceaccount \
   --cluster=securra \
   --namespace=kube-system \
   --name=aws-load-balancer-controller \
-  --attach-policy-arn=arn:aws:iam::113151489485:policy/AWSLoadBalancerControllerIAMPolicy \
+  --attach-policy-arn=arn:aws:iam::113151489485:policy/AWSLoadBalancerControllerIAMPolicySecurra \
   --override-existing-serviceaccounts \
   --approve
 ```
@@ -205,7 +205,7 @@ Create the policy and the role to access the Secret stoe in AWS Secret Manager.
 # Create an IAM policy from the json already downloaded, external-secrets-iam-policy.json
 # This mightve already been done, you will see an error if the Policy already exists, ignore.
 aws iam create-policy \
-    --policy-name AWSExternalSecretsDevsecurraIAMPolicy \
+    --policy-name AWSExternalSecretsDevsecurraIAMPolicySecurra \
     --policy-document file://external-secrets-iam-policy.json
 # Note the ARN returned in the output for use in a later step.
 ```
@@ -220,7 +220,7 @@ eksctl create iamserviceaccount \
   --cluster=securra \
   --namespace=kube-system \
   --name=external-secrets \
-  --attach-policy-arn=arn:aws:iam::113151489485:policy/AWSExternalSecretsDevsecurraIAMPolicy \
+  --attach-policy-arn=arn:aws:iam::113151489485:policy/AWSExternalSecretsDevsecurraIAMPolicySecurra \
   --override-existing-serviceaccounts \
   --approve
 ```
@@ -232,7 +232,7 @@ records to Route53 in order to solve the DNS01 challenge. To enable this, create
 # Create an IAM policy from the json already downloaded, cert-manager-iam_policy.json
 # This mightve already been done, you will see an error if the Policy already exists, ignore.
 aws iam create-policy \
-    --policy-name AWSCertManagerIAMPolicy \
+    --policy-name AWSCertManagerIAMPolicySecurra \
     --policy-document file://cert-manager-iam_policy.json
 # Note the ARN returned in the output for use in a later step.
 ```
@@ -247,7 +247,7 @@ eksctl create iamserviceaccount \
   --cluster=securra \
   --namespace=cert-manager \
   --name=cert-manager \
-  --attach-policy-arn=arn:aws:iam::113151489485:policy/AWSCertManagerIAMPolicy \
+  --attach-policy-arn=arn:aws:iam::113151489485:policy/AWSCertManagerIAMPolicySecurra \
   --override-existing-serviceaccounts \
   --approve
 ```
