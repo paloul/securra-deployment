@@ -92,29 +92,29 @@ nodeGroups:
         autoScaler: true
         cloudWatch: true
 
-  - name: ng-perfecta
-    desiredCapacity: 3
-    minSize: 3
-    maxSize: 3
-    volumeSize: 80
-    volumeType: gp3
-    instanceType: t3a.small
-    availabilityZones: ["us-west-2a", "us-west-2b", "us-west-2c"]
-    labels:
-      node-class: "perfecta"
-    taints:
-      only-perfecta: "true:NoSchedule"
-    tags:
-      # EC2 tags required for cluster-autoscaler auto-discovery
-      k8s.io/cluster-autoscaler/node-template/label/node-class: perfecta
-      k8s.io/cluster-autoscaler/node-template/taint/only-perfecta: "true:NoSchedule"
-      k8s.io/cluster-autoscaler/enabled: "true"
-      k8s.io/cluster-autoscaler/securra: "owned"
-    iam:
-      withAddonPolicies:
-        ebs: true
-        fsx: true
-        efs: true
-        albIngress: true
-        autoScaler: true
-        cloudWatch: true
+  # - name: ng-perfecta
+  #   desiredCapacity: 3
+  #   minSize: 3
+  #   maxSize: 3
+  #   volumeSize: 80
+  #   volumeType: gp3
+  #   instanceType: t3a.small
+  #   availabilityZones: ["us-west-2a", "us-west-2b", "us-west-2c"]
+  #   labels:
+  #     node-class: "perfecta"
+  #   taints:
+  #     only-perfecta: "true:NoSchedule"
+  #   tags:
+  #     # EC2 tags required for cluster-autoscaler auto-discovery
+  #     k8s.io/cluster-autoscaler/node-template/label/node-class: perfecta
+  #     k8s.io/cluster-autoscaler/node-template/taint/only-perfecta: "true:NoSchedule"
+  #     k8s.io/cluster-autoscaler/enabled: "true"
+  #     k8s.io/cluster-autoscaler/securra: "owned"
+  #   iam:
+  #     withAddonPolicies:
+  #       ebs: true
+  #       fsx: true
+  #       efs: true
+  #       albIngress: true
+  #       autoScaler: true
+  #       cloudWatch: true

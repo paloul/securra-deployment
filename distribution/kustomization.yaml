@@ -22,4 +22,4 @@ resources:
 
   ## securra
   - argocd-applications/securra-dashboard.yaml
-  - argocd-applications/securra-perfecta.yaml
+  #- argocd-applications/securra-perfecta.yaml
