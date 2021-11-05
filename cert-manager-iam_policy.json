@@ -14,7 +14,7 @@
               "route53:ListResourceRecordSets",
               "route53:ChangeResourceRecordSets"
           ],
-          "Resource": "arn:aws:route53:::hostedzone/securra*"
+          "Resource": "arn:aws:route53:::hostedzone/*"
       },
       {
         "Effect": "Allow",
