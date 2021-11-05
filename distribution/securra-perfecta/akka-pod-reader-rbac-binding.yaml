@@ -4,7 +4,7 @@ metadata:
   name: read-pods
 subjects:
 - kind: User
-  name: system:serviceaccount:hawkeye-perfecta:default
+  name: system:serviceaccount:securra-perfecta:default
 roleRef:
   kind: Role
   name: pod-reader

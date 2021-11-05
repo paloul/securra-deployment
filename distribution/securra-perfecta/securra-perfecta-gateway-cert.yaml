@@ -1,10 +1,10 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: hawkeye-perfecta-ingressgateway-certs
+  name: securra-perfecta-ingressgateway-certs
   namespace: istio-system
 spec:
-  secretName: hawkeye-perfecta-ingressgateway-certs
+  secretName: securra-perfecta-ingressgateway-certs
   issuerRef:
     name: gateways-issuer
     kind: ClusterIssuer

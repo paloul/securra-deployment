@@ -4,4 +4,4 @@ metadata:
   labels:
     control-plane: kubeflow
     istio-injection: enabled
-  name: hawkeye-perfecta
+  name: securra-dashboard

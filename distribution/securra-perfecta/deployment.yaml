@@ -1,15 +1,15 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hawkeye-perfecta
+  name: securra-perfecta
   labels:
-    app: hawkeye-perfecta
-  namespace: hawkeye-perfecta
+    app: securra-perfecta
+  namespace: securra-perfecta
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: hawkeye-perfecta
+      app: securra-perfecta
   strategy:
     rollingUpdate:
       maxSurge: 3
@@ -18,16 +18,16 @@ spec:
   template:
     metadata:
       labels:
-        app: hawkeye-perfecta
-        actorSystemName: hawkeye-perfecta
+        app: securra-perfecta
+        actorSystemName: securra-perfecta
       annotations:
         sidecar.istio.io/inject: "false"
     spec:
       restartPolicy: Always
       containers:
-        - name: hawkeye-perfecta
+        - name: securra-perfecta
           securityContext: {}
-          image: "113151489485.dkr.ecr.us-west-2.amazonaws.com/ai.beyond.hawkeye/ls-perfecta-cluster:0.0.7"
+          image: "113151489485.dkr.ecr.us-west-2.amazonaws.com/ai.beyond.securra/ls-perfecta-cluster:0.0.7"
           imagePullPolicy: Always
           resources: 
             requests:
@@ -54,21 +54,21 @@ spec:
             - name: PERFECTA.TIMEOUT
               value: "10 seconds"
             - name: CLUSTER.NAME
-              value: "hawkeye-perfecta" # Value needs to match the Deployment app labels. Used by Discovery kubernetes-api for lookup.
+              value: "securra-perfecta" # Value needs to match the Deployment app labels. Used by Discovery kubernetes-api for lookup.
             - name: CLUSTER.TIMEOUT
               value: "20 seconds"
             - name: CLUSTER.MAX.NUM.NODES
               value: "3"
             - name: HTTP.SERVER-HEADER
-              value: "hawkeye-perfecta"
+              value: "securra-perfecta"
             - name: ACTOR.SERIALIZE-MESSAGES
               value: "off"
             - name: PASSIVATE-IDLE-ENTITIES
               value: "15 minutes"
             - name: REMEMBER-ENTITIES
               value: "on"
-            - name: REDIS.HOST # This value just needs the hostname, i.e. hawkeye.nzlitf.ng.0001.usw2.cache.amazonaws.com
-              value: "<<__hawkeye.perfecta.redis.connection_url__>>"
+            - name: REDIS.HOST # This value just needs the hostname, i.e. securra.nzlitf.ng.0001.usw2.cache.amazonaws.com
+              value: "<<__securra.perfecta.redis.connection_url__>>"
           ports:
             - containerPort: 5000
               name: http

@@ -1,8 +1,8 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
-  name: hawkeye-perfecta-gateway
-  namespace: hawkeye-perfecta
+  name: securra-perfecta-gateway
+  namespace: securra-perfecta
 spec:
   selector:
     istio: ingressgateway
@@ -24,4 +24,4 @@ spec:
       protocol: HTTPS
     tls:
       mode: SIMPLE
-      credentialName: hawkeye-perfecta-ingressgateway-certs
+      credentialName: securra-perfecta-ingressgateway-certs

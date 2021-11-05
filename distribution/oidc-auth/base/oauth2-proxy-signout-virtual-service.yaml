@@ -5,7 +5,7 @@ metadata:
   namespace: auth
 spec:
   gateways:
-  - hawkeye/hawkeye-gateway
+  - securra/securra-gateway
   hosts:
   - '*'
   http:

@@ -6,5 +6,5 @@ resources:
 - deployment.yaml
 - service.yaml
 - virtual-service.yaml
-- hawkeye-gateway-cert.yaml
-- hawkeye-gateway.yaml
+- securra-gateway-cert.yaml
+- securra-gateway.yaml

@@ -1,15 +1,15 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hawkeye
+  name: securra
   labels:
-    app: hawkeye
-  namespace: hawkeye-dashboard
+    app: securra
+  namespace: securra-dashboard
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: hawkeye
+      app: securra
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -18,14 +18,14 @@ spec:
   template:
     metadata:
       labels:
-        app: hawkeye
+        app: securra
       annotations:
         sidecar.istio.io/inject: "false"
     spec:
       containers:
-        - name: hawkeye
+        - name: securra
           securityContext: {}
-          image: "113151489485.dkr.ecr.us-west-2.amazonaws.com/ai.beyond.hawkeye/ls-frontend:0.0.20"
+          image: "113151489485.dkr.ecr.us-west-2.amazonaws.com/ai.beyond.securra/ls-frontend:0.0.20"
           imagePullPolicy: Always
           ports:
             - name: http

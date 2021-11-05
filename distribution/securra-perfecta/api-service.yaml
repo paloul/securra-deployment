@@ -2,12 +2,12 @@ apiVersion: v1
 kind: Service
 metadata:
   labels: 
-    app: hawkeye-perfecta
-  name: hawkeye-perfecta-api
-  namespace: hawkeye-perfecta
+    app: securra-perfecta
+  name: securra-perfecta-api
+  namespace: securra-perfecta
 spec:
   selector:
-    app: hawkeye-perfecta
+    app: securra-perfecta
   type: ClusterIP
   ports:
     - port: 5000

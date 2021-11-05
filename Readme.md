@@ -1,4 +1,4 @@
-# Life Signals (Hawkeye) Environment (for AWS)
+# Securra POC Environment (for AWS)
 
 This repo contains a poc effort up on AWS EKS. Ideally, it is to help create the environment on AWS with EKS and deploy the application on it.
 
@@ -82,7 +82,7 @@ This command will take several minutes as `eksctl` creates the entire stack with
 supporting services inside AWS, i.e. VPC, Subnets, Security Groups, Route Tables,  
 in addition to the cluster itself. Once completed you should see the following:
 ```
-[✓]  EKS cluster "hawkeye-1" in "us-west-2" region is ready
+[✓]  EKS cluster "securra-1" in "us-west-2" region is ready
 ```
 With nothing else running on the cluster you can check `kubectl` and see similar output:  
 ```
@@ -133,7 +133,7 @@ to it using eksctl.
 # Replace the attach-policy-arn field with the arn of the policy created above. 
 # Put your cluster name in the cluster field.
 eksctl create iamserviceaccount \
-  --cluster=hawkeye \
+  --cluster=securra \
   --namespace=kube-system \
   --name=cluster-autoscaler \
   --attach-policy-arn=arn:aws:iam::113151489485:policy/AmazonEKSClusterAutoscalerPolicy \
@@ -160,7 +160,7 @@ to it using eksctl.
 # Replace the attach-policy-arn field with the arn of the policy created above. 
 # Put your cluster name in the cluster field.
 eksctl create iamserviceaccount \
-  --cluster=hawkeye \
+  --cluster=securra \
   --namespace=kube-system \
   --name=external-dns \
   --attach-policy-arn=arn:aws:iam::113151489485:policy/AmazonEKSClusterExternalDnsPolicy \
@@ -191,7 +191,7 @@ to it using eksctl.
 # aws-load-balancer-controller in the kube-system namespace
 # Get the policy ARN from the AWS IAM Policy Console
 eksctl create iamserviceaccount \
-  --cluster=hawkeye \
+  --cluster=securra \
   --namespace=kube-system \
   --name=aws-load-balancer-controller \
   --attach-policy-arn=arn:aws:iam::113151489485:policy/AWSLoadBalancerControllerIAMPolicy \
@@ -205,7 +205,7 @@ Create the policy and the role to access the Secret stoe in AWS Secret Manager.
 # Create an IAM policy from the json already downloaded, external-secrets-iam-policy.json
 # This mightve already been done, you will see an error if the Policy already exists, ignore.
 aws iam create-policy \
-    --policy-name AWSExternalSecretsDevHawkeyeIAMPolicy \
+    --policy-name AWSExternalSecretsDevsecurraIAMPolicy \
     --policy-document file://external-secrets-iam-policy.json
 # Note the ARN returned in the output for use in a later step.
 ```
@@ -217,10 +217,10 @@ to it using eksctl.
 # Get the policy ARN from the AWS IAM Policy Console
 # Update the cluster name if different
 eksctl create iamserviceaccount \
-  --cluster=hawkeye \
+  --cluster=securra \
   --namespace=kube-system \
   --name=external-secrets \
-  --attach-policy-arn=arn:aws:iam::113151489485:policy/AWSExternalSecretsDevHawkeyeIAMPolicy \
+  --attach-policy-arn=arn:aws:iam::113151489485:policy/AWSExternalSecretsDevsecurraIAMPolicy \
   --override-existing-serviceaccounts \
   --approve
 ```
@@ -244,7 +244,7 @@ to it using eksctl.
 # Update the cluster value
 # Update the attach-policy-arn value with the arn of the policy created above
 eksctl create iamserviceaccount \
-  --cluster=hawkeye \
+  --cluster=securra \
   --namespace=cert-manager \
   --name=cert-manager \
   --attach-policy-arn=arn:aws:iam::113151489485:policy/AWSCertManagerIAMPolicy \
@@ -277,5 +277,5 @@ Once the environment is setup proceed to deploy the application with ArgoCD.
 4. Get the admin password to the ArgoCD Dashboard and login. The ArgoCD Dashboard is only accessible via port forward:
   - `kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d`
   - `kubectl port-forward svc/argocd-server -n argocd 8888:80`
-5. Finally roll out the main argocd hawkeye application that will instruct argocd to deploy all pieces
-  - `kubectl apply -f distribution/hawkeye.yaml`
+5. Finally roll out the main argocd securra application that will instruct argocd to deploy all pieces
+  - `kubectl apply -f distribution/securra.yaml`

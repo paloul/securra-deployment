@@ -20,6 +20,6 @@ resources:
   - argocd-applications/external-secrets.yaml
   - argocd-applications/metrics-server.yaml
 
-  ## Hawkeye
-  - argocd-applications/hawkeye-dashboard.yaml
-  - argocd-applications/hawkeye-perfecta.yaml
+  ## securra
+  - argocd-applications/securra-dashboard.yaml
+  - argocd-applications/securra-perfecta.yaml

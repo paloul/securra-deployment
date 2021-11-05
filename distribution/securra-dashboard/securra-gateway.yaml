@@ -1,8 +1,8 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
-  name: hawkeye-gateway
-  namespace: hawkeye-dashboard
+  name: securra-gateway
+  namespace: securra-dashboard
 spec:
   selector:
     istio: ingressgateway
@@ -24,4 +24,4 @@ spec:
       protocol: HTTPS
     tls:
       mode: SIMPLE
-      credentialName: hawkeye-ingressgateway-certs
+      credentialName: securra-ingressgateway-certs

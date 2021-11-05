@@ -10,5 +10,5 @@ resources:
 - internal-virtual-service.yaml
 - api-service.yaml
 - api-virtual-service.yaml
-- hawkeye-perfecta-gateway-cert.yaml
-- hawkeye-perfecta-gateway.yaml
+- securra-perfecta-gateway-cert.yaml
+- securra-perfecta-gateway.yaml
