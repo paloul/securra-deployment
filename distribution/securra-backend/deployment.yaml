@@ -1,15 +1,15 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: securra
+  name: securra-backend
   labels:
-    app: securra
-  namespace: securra-dashboard
+    app: securra-backend
+  namespace: securra-backend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: securra
+      app: securra-backend
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -18,20 +18,16 @@ spec:
   template:
     metadata:
       labels:
-        app: securra
+        app: securra-backend
       annotations:
         sidecar.istio.io/inject: "false"
     spec:
       restartPolicy: Always
       containers:
-        - name: securra
+        - name: securra-backend
           securityContext: {}
-          image: "113151489485.dkr.ecr.us-west-2.amazonaws.com/ai.beyond.securra-poc/securra-fe:0.0.1"
+          image: "113151489485.dkr.ecr.us-west-2.amazonaws.com/ai.beyond.securra-poc/securra-be:0.0.1"
           imagePullPolicy: Always
-          ports:
-            - name: http
-              containerPort: 80
-              protocol: TCP
           livenessProbe:
             httpGet:
               path: /
@@ -47,10 +43,14 @@ spec:
             limits:
               memory: "1.25Gi"
               cpu: "1900m"
+          ports:
+            - containerPort: 8000
+              name: http
+              protocol: TCP
       nodeSelector:
-        node-class: "front-end"
+        node-class: "front-end" # Even though this is backend, just host this single pod on ng-frontend
       tolerations:
-      - key: "only-frontend"
+      - key: "only-frontend" # Even though this is backend, just host this single pod on ng-frontend
         operator: "Equal"
         value: "true"
         effect: "NoSchedule"

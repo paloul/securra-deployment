@@ -9,17 +9,17 @@ spec:
   hosts:
   - <<__subdomain_dashboard__>>.<<__domain__>>
   http:
-  - name: "perfecta-route"
+  - name: "backend-route"
     match:
     - uri: 
-        prefix: "/perfecta/"
+        prefix: "/backend/"
     - uri:
-        prefix: "/perfecta"
+        prefix: "/backend"
     rewrite:
       uri: "/"
     route:
     - destination:
-        host: securra-perfecta-api.securra-perfecta.svc.cluster.local
+        host: securra-backend-api.securra-backend.svc.cluster.local
         port:
           number: 5000
     corsPolicy:

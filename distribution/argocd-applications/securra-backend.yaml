@@ -1,18 +1,18 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: securra-perfecta
+  name: securra-backend
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: <<__git_repo.url__>>
     targetRevision: <<__git_repo.target_revision__>>
-    path: distribution/securra-perfecta
+    path: distribution/securra-backend
     kustomize:
       version: v4.0.5
   destination:
-    namespace: securra-perfecta
+    namespace: securra-backend
     server: https://kubernetes.default.svc
   syncPolicy:
     automated:

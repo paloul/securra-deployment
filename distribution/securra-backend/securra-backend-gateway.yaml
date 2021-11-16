@@ -1,14 +1,14 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
-  name: securra-perfecta-gateway
-  namespace: securra-perfecta
+  name: securra-backend-gateway
+  namespace: securra-backend
 spec:
   selector:
     istio: ingressgateway
   servers:
   - hosts:
-    - <<__subdomain_perfecta__>>.<<__domain__>>
+    - <<__subdomain_backend__>>.<<__domain__>>
     port:
       name: http
       number: 80
@@ -17,11 +17,11 @@ spec:
     tls:
       httpsRedirect: true
   - hosts:
-    - <<__subdomain_perfecta__>>.<<__domain__>>
+    - <<__subdomain_backend__>>.<<__domain__>>
     port:
       name: https
       number: 443
       protocol: HTTPS
     tls:
       mode: SIMPLE
-      credentialName: securra-perfecta-ingressgateway-certs
+      credentialName: securra-backend-ingressgateway-certs

@@ -1,19 +1,19 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: securra-perfecta-api
-  namespace: securra-perfecta
+  name: securra-backend-api
+  namespace: securra-backend
 spec:
   gateways:
-  - securra-perfecta-gateway
+  - securra-backend-gateway
   hosts:
-  - <<__subdomain_perfecta__>>.<<__domain__>>
+  - <<__subdomain_backend__>>.<<__domain__>>
   http:
   - route:
     - destination:
-        host: securra-perfecta-api.securra-perfecta.svc.cluster.local
+        host: securra-backend-api.securra-backend.svc.cluster.local
         port:
-          number: 5000
+          number: 8000
     corsPolicy:
       allowOrigins:
       - exact: http://localhost:3000

@@ -4,4 +4,4 @@ metadata:
   labels:
     control-plane: kubeflow
     istio-injection: enabled
-  name: securra-perfecta
+  name: securra-backend
