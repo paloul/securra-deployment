@@ -21,7 +21,7 @@ spec:
     - destination:
         host: securra-backend-api.securra-backend.svc.cluster.local
         port:
-          number: 5000
+          number: 8000
     corsPolicy:
       allowOrigins:
       - exact: http://localhost:3000
