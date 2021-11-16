@@ -43,21 +43,21 @@ spec:
       - name: extraArgs.skip-provider-button
         value: "true"
       - name: extraArgs.cookie-domain
-        value: .<<__domain__>>
+        value: .securra.beyond.ai
       - name: extraArgs.whitelist-domain
-        value: .<<__domain__>>
+        value: .securra.beyond.ai
       - name: extraArgs.oidc-issuer-url
-        value: <<__oidc.issuer__>>
+        value: https://cognito-idp.us-west-2.amazonaws.com/us-west-2_5BWzu3lFw
       # - name: extraArgs.login-url
-      #   value: "https://<<__subdomain_auth__>>.<<__oidc.issuer__>>/auth/realms/kubeflow/protocol/openid-connect/auth"
+      #   value: "https://auth.https://cognito-idp.us-west-2.amazonaws.com/us-west-2_5BWzu3lFw/auth/realms/kubeflow/protocol/openid-connect/auth"
       # - name: extraArgs.oidc-jwks-url
-      #   value: "https://<<__oidc.issuer__>>/keys"
+      #   value: "https://https://cognito-idp.us-west-2.amazonaws.com/us-west-2_5BWzu3lFw/keys"
       # - name: extraArgs.redeem-url
-      #   value: "https://<<__subdomain_auth__>>.<<__oidc.issuer__>>/auth/realms/kubeflow/protocol/openid-connect/token"
+      #   value: "https://auth.https://cognito-idp.us-west-2.amazonaws.com/us-west-2_5BWzu3lFw/auth/realms/kubeflow/protocol/openid-connect/token"
       # - name: extraArgs.profile-url
-      #   value: "https://<<__subdomain_auth__>>.<<__oidc.issuer__>>/auth/realms/kubeflow/protocol/openid-connect/userinfo"
+      #   value: "https://auth.https://cognito-idp.us-west-2.amazonaws.com/us-west-2_5BWzu3lFw/auth/realms/kubeflow/protocol/openid-connect/userinfo"
       # - name: extraArgs.validate-url
-      #   value: "https://<<__subdomain_auth__>>.<<__oidc.issuer__>>.nl/auth/realms/kubeflow/protocol/openid-connect/userinfo"
+      #   value: "https://auth.https://cognito-idp.us-west-2.amazonaws.com/us-west-2_5BWzu3lFw.nl/auth/realms/kubeflow/protocol/openid-connect/userinfo"
       # - name: extraArgs.scope
       #   value: email
       # - name: extraArgs.scope
@@ -71,7 +71,7 @@ spec:
       - name: extraArgs.session-store-type
         value: "redis"
       - name: extraArgs.redis-connection-url
-        value: <<__oidc.redis.connection_url__>>
+        value: redis://securra.nzlitf.ng.0001.usw2.cache.amazonaws.com:6379
     repoURL: https://oauth2-proxy.github.io/manifests
     targetRevision: 3.3.2
   destination:

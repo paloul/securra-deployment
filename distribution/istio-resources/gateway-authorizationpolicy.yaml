@@ -17,7 +17,7 @@ spec:
   - to:
     - operation:
         hosts:
-        - <<__subdomain_dashboard__>>.<<__domain__>>
-        - <<__subdomain_perfecta__>>.<<__domain__>>
-        - <<__subdomain_argocd__>>.<<__domain__>>
+        - dashboard.securra.beyond.ai
+        - <<__subdomain_perfecta__>>.securra.beyond.ai
+        - argocd.securra.beyond.ai
         

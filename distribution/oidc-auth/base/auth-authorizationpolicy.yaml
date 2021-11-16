@@ -13,10 +13,10 @@ spec:
   - to:
     - operation:
         hosts:
-        - "<<__subdomain_auth__>>.<<__domain__>>"
-        - "<<__subdomain_dashboard__>>.<<__domain__>>" # needed for redirect after authentication
-        - "<<__subdomain_perfecta__>>.<<__domain__>>" # needed for redirect after authentication
-        - "<<__subdomain_argocd__>>.<<__domain__>>" # needed for redirect after authentication
+        - "auth.securra.beyond.ai"
+        - "dashboard.securra.beyond.ai" # needed for redirect after authentication
+        - "<<__subdomain_perfecta__>>.securra.beyond.ai" # needed for redirect after authentication
+        - "argocd.securra.beyond.ai" # needed for redirect after authentication
 ---
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy

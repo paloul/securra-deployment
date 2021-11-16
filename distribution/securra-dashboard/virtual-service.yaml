@@ -7,7 +7,7 @@ spec:
   gateways:
   - securra-gateway
   hosts:
-  - <<__subdomain_dashboard__>>.<<__domain__>>
+  - dashboard.securra.beyond.ai
   http:
   - name: "backend-route"
     match:

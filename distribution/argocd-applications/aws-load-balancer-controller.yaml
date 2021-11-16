@@ -15,15 +15,15 @@ spec:
     helm:
       parameters:
         - name: serviceAccount.annotations.eks\.amazonaws\.com/role-arn
-          value: <<__role_arn.loadbalancer_controller__>>
+          value: arn:aws:iam::113151489485:role/eksctl-securra-addon-iamserviceaccount-kube-Role1-1L1YXASDMWKTC
         - name: clusterName
-          value: <<__cluster_name__>>
+          value: securra
         - name: image.repository
           value: amazon/aws-alb-ingress-controller
         - name: vpcId
-          value: <<__vpc_id__>>
+          value: vpc-069ca89353b19abd3
         - name: region
-          value: <<__aws_region__>>
+          value: us-west-2
         - name: serviceAccount.create
           value: "true"
         - name: rbac.create

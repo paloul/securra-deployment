@@ -7,7 +7,7 @@ spec:
   gateways:
   - securra-backend-gateway
   hosts:
-  - <<__subdomain_backend__>>.<<__domain__>>
+  - backend.securra.beyond.ai
   http:
   - route:
     - destination:

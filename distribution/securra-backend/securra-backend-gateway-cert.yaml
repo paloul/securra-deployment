@@ -8,6 +8,6 @@ spec:
   issuerRef:
     name: gateways-issuer
     kind: ClusterIssuer
-  commonName: <<__subdomain_backend__>>.<<__domain__>>
+  commonName: backend.securra.beyond.ai
   dnsNames:
-    - <<__subdomain_backend__>>.<<__domain__>>
+    - backend.securra.beyond.ai
