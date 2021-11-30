@@ -26,7 +26,7 @@ spec:
       containers:
         - name: securra
           securityContext: {}
-          image: "113151489485.dkr.ecr.us-west-2.amazonaws.com/ai.beyond.securra-poc/securra-fe:0.0.6"
+          image: "113151489485.dkr.ecr.us-west-2.amazonaws.com/ai.beyond.securra-poc/securra-fe:0.0.7"
           imagePullPolicy: Always
           ports:
             - name: http
